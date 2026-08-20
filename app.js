@@ -11,7 +11,7 @@ const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const ExpressError = require('./utils/ExpressError.js'); 
 const session = require('express-session'); 
-const { MongoStore } = require("connect-mongo"); 
+const MongoStore = require("connect-mongo");
 const connectFlash = require('connect-flash'); 
 const passport = require('passport');
 const localStrategy = require('passport-local');
@@ -55,6 +55,7 @@ const store = MongoStore.create({
     mongoUrl: dbUrl,
     touchAfter: 24 * 3600
 });
+
 
 store.on("error", function(err) {
     console.error("MongoDB session store error:", err);
