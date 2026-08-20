@@ -20,14 +20,8 @@ const listingSchema = new Schema({
         required:true
     },
     image: {
-    filename: {
-        type: String,
-        default: "listingimage",
-    },
-    url: {
-        type: String,
-        default: "https://images.unsplash.com/..."
-    }
+    url: String,
+    filename: String
 },
     country: String,
     reviews: [
@@ -35,7 +29,22 @@ const listingSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Review'
         }
-    ]
+    ],
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    geometry: {
+    type: {
+        type: String,
+        enum: ['Point'],
+        required: true
+    },
+    coordinates: {
+        type: [Number],
+        required: true
+    }
+}
 });
 
 listingSchema.post('findOneAndDelete', async (listing) => {
