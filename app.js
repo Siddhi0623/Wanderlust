@@ -78,7 +78,9 @@ const sessionOptions = {
 };
 
 
-
+// app.get('/', (req, res) => {
+//     res.redirect('/listings');
+// });
 // app.get('/', (req, res) => {
 //     res.send("Hi I am root");
 // });
@@ -118,6 +120,10 @@ app.use((req, res, next) => {
 app.use('/listings', listings);
 app.use('/listings/:id/reviews', reviews);
 app.use('/', users);
+
+app.get('/', (req, res) => {
+    res.redirect('/listings');
+});
 
 app.use((err, req, res, next) => {
     console.error("🔥 ERROR:", err);
