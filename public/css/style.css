@@ -134,3 +134,89 @@ body{
     width: 100%;
 
  }
+
+ /* Password Strength */
+
+.strength-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+}
+
+#strength-text {
+    font-weight: 600;
+}
+
+.strength-bars {
+    display: flex;
+    gap: 5px;
+    width: 100%;
+}
+
+.strength-bar {
+    height: 5px;
+    flex: 1;
+    background-color: #ddd;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+.password-requirements {
+    font-size: 0.82rem;
+    line-height: 1.8;
+}
+
+.password-requirements div {
+    color: #777;
+    transition: 0.2s ease;
+}
+
+.requirement-icon {
+    display: inline-block;
+    width: 20px;
+    font-weight: bold;
+}
+
+.requirement-valid {
+    color: #198754 !important;
+}
+
+.requirement-invalid {
+    color: #777;
+}
+
+.requirement-valid .requirement-icon {
+    color: #198754;
+}
+
+.password-input-wrapper {
+    position: relative;
+}
+
+.password-input-wrapper input {
+    padding-right: 45px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    border: none;
+    background: transparent;
+    padding: 5px;
+    
+    cursor: pointer;
+    color: #6c757d;
+}
+
+.password-toggle:hover {
+    color: #212529;
+}
+
+.password-toggle:focus {
+    outline: none;
+    box-shadow: none;
+}
