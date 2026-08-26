@@ -4,10 +4,27 @@
         <h3>Create new Listings</h3>
     <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
         <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
-            <input name="listing[title]" placeholder="Add a catchy Title" type="text" class="form-control "required>
-            <div class="valid-feedback">Title looks good!</div>
-        </div>
+            <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+
+    <input
+        name="listing[title]"
+        placeholder="Enter title"
+        type="text"
+        class="form-control"
+        id="title"
+        maxlength="30"
+        required
+    >
+
+    <small class="text-muted">
+        <span id="titleCount">0</span>/30 characters
+    </small>
+
+    <div class="invalid-feedback">
+        Title must be between 1 and 30 characters.
+    </div>
+</div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
             <textarea name="listing[description]" type="text" class="form-control"  required></textarea>
@@ -16,8 +33,19 @@
         <div class="row">
             <div class="mb-3 col-md-4">
             <label for="price" class="form-label">Price</label>
-            <input name="listing[price]" placeholder="1200" class="form-control" required>
+            <input  name="listing[price]"
+        placeholder="Enter price"
+        type="number"
+        class="form-control"
+        id="price"
+        min="1"
+        max="100000000"
+        step="1"
+    required>
             <div class="invalid-feedback">Please provide a valid price.</div>
+            <div class="invalid-feedback">
+        Price must be between ₹1 and ₹100,000,000.
+    </div>
         </div>
         <div class="mb-3 col-md-8">
             <label for="country" class="form-label">Country</label>
@@ -46,3 +74,12 @@
     </form>
     </div>
     </div>
+
+    <script>
+    const titleInput = document.getElementById("title");
+    const titleCount = document.getElementById("titleCount");
+
+    titleInput.addEventListener("input", function () {
+        titleCount.textContent = titleInput.value.length;
+    });
+</script>
