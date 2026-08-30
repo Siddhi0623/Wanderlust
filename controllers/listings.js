@@ -32,11 +32,17 @@ module.exports.createListing = async (req, res, next) => {
   limit: 1,
 })
   .send()
-    let url = req.file.path;
-    let filename = req.file.filename;
+    let url = req.files[0].path;
+    let filename = req.files[0].filename;
      const newListing = new Listing(req.body.listing);
 
      newListing.owner = req.user._id;
+       
+    newListing.images = req.files.map(file => ({
+    url: file.path,
+    filename: file.filename
+}));
+
      newListing.image = { url, filename };
      newListing.geometry = response.body.features[0].geometry;
      newListing.coordinates = response.body.features[0].geometry.coordinates;
@@ -104,7 +110,13 @@ module.exports.renderEditForm = async (req, res) => {
         return res.redirect("/listings");
     }
 
-    let originalImageUrl = listing.image?.url || "";
+    let originalImageUrl = "";
+
+    if (listing.images && listing.images.length > 0) {
+    originalImageUrl = listing.images[0].url;
+} else if (listing.image?.url) {
+    originalImageUrl = listing.image.url;
+}
 
     if (originalImageUrl) {
         originalImageUrl = originalImageUrl.replace(

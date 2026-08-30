@@ -101,22 +101,132 @@
         </div>
     </div>
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
-        <% for(let listing of listings){ %>
-    <a href="/listings/<%= listing._id %>" class="listing-link">
-    <div class="card col listing-card" >
-         <div class="card listing-card"></div>
-    <img src="<%= listing.image.url %>" class="card-img-top" alt="listing image">
-     <div class="card-img-overlay"></div>
-  <div class="card-body">
-    <p class="card-text"> 
-        <b><%= listing.title %></b><br>
-       &#x20B9;<%= Number(listing.price).toLocaleString("en-IN") %>/night
-       <i class="tax-info"> &nbsp; &nbsp;+18% GST</i>
-    </p>
-  </div>
+    <% for(let listing of listings){ %>
+
+        <div class="col mb-4">
+
+    <div class="card listing-card">
+
+        <!-- Image Carousel -->
+        <div
+            id="carousel-<%= listing._id %>"
+            class="carousel slide"
+            data-bs-interval="false"
+        >
+
+            <div class="carousel-inner">
+
+                <% if (listing.images && listing.images.length > 0) { %>
+
+                    <% listing.images.forEach((image, index) => { %>
+
+                        <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+
+                            <!-- Click image to open listing -->
+                            <a href="/listings/<%= listing._id %>">
+
+                                <img
+                                    src="<%= image.url %>"
+                                    class="d-block w-100 card-img-top"
+                                    alt="listing image"
+                                >
+
+                            </a>
+
+                        </div>
+
+                    <% }) %>
+
+                <% } else if (listing.image && listing.image.url) { %>
+
+                    <!-- Old listing -->
+                    <div class="carousel-item active">
+
+                        <a href="/listings/<%= listing._id %>">
+
+                            <img
+                                src="<%= listing.image.url %>"
+                                class="d-block w-100 card-img-top"
+                                alt="listing image"
+                            >
+
+                        </a>
+
+                    </div>
+
+                <% } %>
+
+            </div>
+
+
+            <!-- Previous Button -->
+            <% if (listing.images && listing.images.length > 1) { %>
+
+                <button
+                    class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#carousel-<%= listing._id %>"
+                    data-bs-slide="prev"
+                    onclick="event.preventDefault(); event.stopPropagation();"
+                >
+
+                    <span class="carousel-control-prev-icon"></span>
+
+                </button>
+
+
+                <!-- Next Button -->
+
+                <button
+                    class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#carousel-<%= listing._id %>"
+                    data-bs-slide="next"
+                    onclick="event.preventDefault(); event.stopPropagation();"
+                >
+
+                    <span class="carousel-control-next-icon"></span>
+
+                </button>
+
+            <% } %>
+
+        </div>
+
+
+        <!-- Listing Information -->
+
+        <a
+            href="/listings/<%= listing._id %>"
+            class="listing-link"
+        >
+
+            <div class="card-body">
+
+                <p class="card-text">
+
+                    <b><%= listing.title %></b>
+
+                    <br>
+
+                    &#x20B9;<%= Number(listing.price).toLocaleString("en-IN") %>/night
+
+                    <i class="tax-info">
+                        &nbsp; &nbsp;+18% GST
+                    </i>
+
+                </p>
+
+            </div>
+
+        </a>
+
+    </div>
+
 </div>
-</a>
-<% } %>
+
+    <% } %>
+</div>
 
     </div>
     

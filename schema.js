@@ -24,12 +24,10 @@ module.exports.listingSchema = Joi.object({
             .messages({
                 "number.base": "Price must be a valid number.",
                 "number.positive": "Price must be greater than 0.",
-                "number.base": "Price must be a valid number.",
                 "number.integer": "Price must be a whole number.",
                 "number.min": "Price must be greater than 0.",
                 "number.max": "Price cannot exceed ₹100,000,000.",
                 "any.required": "Price is required."
-                // "any.required": "Price is required."
             }),
 
 

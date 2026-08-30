@@ -55,10 +55,35 @@
         </div>
         
 
-         <div class="mb-3">
-            <label for="image" class="form-label">Upload listing Image</label>
-            <input name="listing[image]" type="file" class="form-control">
+        <div class="mb-3">
+    <label class="form-label">Images</label>
+
+    <div id="image-container">
+
+        <div class="image-input mb-2">
+            <input
+                name="listing[images]"
+                type="file"
+                class="form-control"
+                accept="image/*"
+                required
+            >
         </div>
+
+    </div>
+
+    <button
+        type="button"
+        id="add-image"
+        class="btn btn-outline-dark btn-sm mt-2"
+    >
+        + Add image
+    </button>
+
+    <div class="form-text">
+        You can add multiple images of your property.
+    </div>
+</div>
 
         <div class="mb-3">
             <label for="location" class="form-label">Location</label>
@@ -81,5 +106,28 @@
 
     titleInput.addEventListener("input", function () {
         titleCount.textContent = titleInput.value.length;
+    });
+</script>
+
+<script>
+    const imageContainer = document.getElementById("image-container");
+    const addImageButton = document.getElementById("add-image");
+
+    addImageButton.addEventListener("click", function () {
+
+        const imageInput = document.createElement("div");
+
+        imageInput.classList.add("image-input", "mb-2");
+
+        imageInput.innerHTML = `
+            <input
+                name="listing[images]"
+                type="file"
+                class="form-control"
+                accept="image/*"
+            >
+        `;
+
+        imageContainer.appendChild(imageInput);
     });
 </script>
